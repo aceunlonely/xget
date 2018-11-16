@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/aceunlonely/xget/issues"
   },
-  "homepage": "https://github.com/aceunlonely/xget#readme"
+  "homepage": "https://github.com/aceunlonely/xget#readme",
+  "dependencies": {
+    "peeriocjs": "^2.4.1"
+  }
 }
