@@ -2,6 +2,7 @@
 ```javascript
 //easy xgetObjetRequst  xgor
 {
+    isLust: true,
     input:" name,age | lily,13 | lucy, 15  | site http://apporoad.com",
     finder: {
         type:"default"
@@ -16,6 +17,7 @@
 
 //combo xgor
 {
+    isLust: true,
     input:" name,age | lily,13 | lucy, 15  | site http://apporoad.com",
     finder: {
         type:"default"

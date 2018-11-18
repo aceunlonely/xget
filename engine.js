@@ -2,16 +2,14 @@ var inputModule = require('peeriocjs').module("xget_input")
 var finderModule = require('peeriocjs').module('xget_finder')
 var extractorModule = require('peeriocjs').module('xget_extractor')
 
-//load plugins
-var pluginsPath = __dirname + "/plugins" 
-//load integrate
+var util = require('./util')
 
-//load ext 
-//todo
+//plusgins
+const plugins = require('./plugins.js')
 
 
 //main
-/*
+/* lust shall be
 {
     input:" name,age | lily,13 | lucy, 15  | site http://apporoad.com",
     finder: {
@@ -25,4 +23,18 @@ var pluginsPath = __dirname + "/plugins"
     output:null
 }
 */
+/**
+ * main logic
+ * @param {*} lust 
+ * @param {*} options 
+ */
+var run = (lust,options)=>{
+    //check lust structure
+    checkLust(lust)
 
+    //
+}
+
+var checkLust =(lust)=>{
+    //todo
+}
