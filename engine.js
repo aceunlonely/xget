@@ -49,7 +49,7 @@ var inputHandler = (lust,options)=>{
             else{
                 //todo add params
                 var type =lust.input.type || config.defaultInput
-                var inputOrPromise = inputModule.invoke(type)[type]()
+                var inputOrPromise = inputModule.invoke(type)[type](lust.input,options)
                 if(inputOrPromise.then){
                     return new Promise((r,j)=>{
                         inputOrPromise.then(data=>{

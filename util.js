@@ -19,6 +19,13 @@ var endWith=function(str,s){
     else
        return false;
    }
+
+exports.endTrim=(str,end) =>{
+   if(endWith(str,end)){
+      return str.substring(0,str.length - end.length)
+   }
+   return str
+}
 var startWith=function(str,s){
     if(s==null||s==""|| str==null || str==""||str.length==0||s.length>str.length)
        return false;

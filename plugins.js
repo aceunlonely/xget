@@ -29,9 +29,12 @@ var innerLoad =(p,m,notOverride)=>{
         }else{
             files.forEach(filename=>{
                 var rPath = path.join(p,filename)
-                if(isDir(rPath) || util.endWith(filename,".js")){
+                if(isDir(rPath)){
                     ////注册方法
                     ioc.module(m).reg(filename,require(rPath).run,null,notOverride)
+                }else if(util.endWith(filename,".js")){
+                    ////注册方法
+                    ioc.module(m).reg(util.endTrim(filename,".js"),require(rPath).run,null,notOverride)
                 }
                 else{
                     if(config.verbose){
