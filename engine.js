@@ -106,8 +106,10 @@ var extractorHandler=(lust,options,result)=>{
 
 var outputHandler=(lust,options,result)=>{
     return new Promise((r,j)=>{
-        if(!lust.output)
+        if(!lust.output){
             r(result)
+            return
+        }
         if(lust.output.isLust){
             //if output lust's input is null, fill it with result
             if(!lust.output.input){

@@ -8,14 +8,14 @@ var iRun = (input,finder,options)=>{
     if(finder.position){
         var sIndex = 0,eIndex =input.length -1
         if(finder.position.after && finder.position.after.length>0){
-            finder.position.after.foreach(a=>{
+            finder.position.after.forEach(a=>{
                 var si = input.indexOf(a)
                 if(si > sIndex && si> -1)
                     sIndex = si
             })
         }
         if(finder.position.before && finder.position.before.length>0){
-            finder.position.before.foreach(a=>{
+            finder.position.before.forEach(a=>{
                 var ei = input.indexOf(a)
                 if(ei > -1 && ei< eIndex){
                     eIndex = ei

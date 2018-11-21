@@ -2,8 +2,8 @@
 require('../config')
 var engine = require('../engine')
 
-
-var lust ={
+//no
+var lustNo ={
     isLust: true,
     input:{
         type: "file",
@@ -19,11 +19,13 @@ var lust ={
     },
     extractor:{
         type:"text",
-        regEx:"/E\\d{8}/"
+        regEx:"H\\d{8}"
     }
 }
 
-engine.run(lust,null).then(data => {
+//
+
+engine.run(lustNo,null).then(data => {
     console.log(data)
 })
 
