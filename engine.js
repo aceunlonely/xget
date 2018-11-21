@@ -76,7 +76,7 @@ var inputHandler = (lust,options)=>{
 var finderHandler=(lust,options,input)=>{
     var type = lust.finder.type || config.defaultFinder
     //todo add params
-    var resultOrPromise = finderModule.invoke(type)[type]()
+    var resultOrPromise = finderModule.invoke(type)[type](input,lust.finder,options)
     return new Promise((r,j)=>{
         if(resultOrPromise.then){
             resultOrPromise.then(data=>{
@@ -91,7 +91,7 @@ var finderHandler=(lust,options,input)=>{
 var extractorHandler=(lust,options,result)=>{
     var type = lust.extractor.type || config.defaultExtractor
     //todo add Params
-    var resultOrPromise = extractorModule.invoke(type)[type]()
+    var resultOrPromise = extractorModule.invoke(type)[type](result,lust.extractor,options)
     return new Promise((r,j)=>{
         if(resultOrPromise.then){
             resultOrPromise.then(data=>{

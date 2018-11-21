@@ -12,20 +12,12 @@ var isDir = function (p) {
 };
     
 var pluginsPath = config.pluginsPath || ( __dirname + "/plugins" )
-//load plugins
-//load integrate
-innerLoad(pluginsPath + "/integrate/input", "xget_input",true)
-innerLoad(pluginsPath + "/integrate/finder", "xget_finder",true)
-innerLoad(pluginsPath + "/integrate/extractor", "xget_extractor",true)
-//load ext 
-innerLoad(pluginsPath + "/ext/input", "xget_input",false)
-innerLoad(pluginsPath + "/ext/finder", "xget_finder",false)
-innerLoad(pluginsPath + "/ext/extractor", "xget_extractor",false)
 
 var innerLoad =(p,m,notOverride)=>{
     fs.readdir(p,(err,files)=>{
         if(err){
-            console.warn(err)
+            if(config.verbose)
+                console.warn("xget-plugins: 读取路径出错：" + p  + " " + err)
         }else{
             files.forEach(filename=>{
                 var rPath = path.join(p,filename)
@@ -45,3 +37,14 @@ var innerLoad =(p,m,notOverride)=>{
         }
     })
 }
+
+//load plugins
+//load integrate
+innerLoad(pluginsPath + "/integrate/input", "xget_input",true)
+innerLoad(pluginsPath + "/integrate/finder", "xget_finder",true)
+innerLoad(pluginsPath + "/integrate/extractor", "xget_extractor",true)
+//load ext 
+innerLoad(pluginsPath + "/ext/input", "xget_input",false)
+innerLoad(pluginsPath + "/ext/finder", "xget_finder",false)
+innerLoad(pluginsPath + "/ext/extractor", "xget_extractor",false)
+

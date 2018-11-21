@@ -10,7 +10,7 @@ var check =(input)=>{
 {
     "type":"file",
     "path" : "d:/abc.txt",
-    "encoding" : "uft8"
+    "encoding" : "utf8"
 }
 */
 
@@ -18,3 +18,11 @@ exports.run=(input,options)=>{
     check(input)
     return fs.readFileSync(input.path, { encoding : ( input.encoding || "utf8")});
 }
+
+exports.example = {
+    type: "file",
+    path : "d:/abc.txt",
+    encoding : "utf8(默认值utf8)"
+}
+
+exports.exampleResult = "content"
