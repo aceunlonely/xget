@@ -23,10 +23,17 @@ var innerLoad =(p,m,notOverride)=>{
                 var rPath = path.join(p,filename)
                 if(isDir(rPath)){
                     ////注册方法
-                    ioc.module(m).reg(filename,require(rPath).run,null,notOverride)
+                    var fn = require(rPath).run
+                    if(!fn)
+                        throw Error("xget-plugins: 插件必须实现exports.run方法:" + rPath )
+                    ////注册方法
+                    ioc.module(m).reg(filename,fn,null,notOverride)
                 }else if(util.endWith(filename,".js")){
                     ////注册方法
-                    ioc.module(m).reg(util.endTrim(filename,".js"),require(rPath).run,null,notOverride)
+                    var fn = require(rPath).run
+                    if(!fn)
+                        throw Error("xget-plugins: 插件必须实现exports.run方法:" + rPath )
+                    ioc.module(m).reg(util.endTrim(filename,".js"),fn,null,notOverride)
                 }
                 else{
                     if(config.verbose){
