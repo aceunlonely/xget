@@ -3,7 +3,7 @@ var check =()=>{}
 
 var iRun = (result,extractor,options)=>{
     if(!result) return ''
-    var rr =''
+    var rr =result
     if(extractor.regEx){
        var re =  new RegExp(extractor.regEx,"mg")
        var rs = result.match(re)
@@ -11,7 +11,6 @@ var iRun = (result,extractor,options)=>{
            rr =rs
        }
     }
-
     return rr
 }
 

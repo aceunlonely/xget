@@ -1,4 +1,5 @@
 
+var util = require('./util')
 
 var iRun = (input,finder,options)=>{
     //input content
@@ -9,14 +10,14 @@ var iRun = (input,finder,options)=>{
         var sIndex = 0,eIndex =input.length -1
         if(finder.position.after && finder.position.after.length>0){
             finder.position.after.forEach(a=>{
-                var si = input.indexOf(a)
+                var si = util.indexOf(input,a)// input.indexOf(a)
                 if(si > sIndex && si> -1)
                     sIndex = si
             })
         }
         if(finder.position.before && finder.position.before.length>0){
             finder.position.before.forEach(a=>{
-                var ei = input.indexOf(a)
+                var ei = util.indexOf(input,a ) //input.indexOf(a)
                 if(ei > -1 && ei< eIndex){
                     eIndex = ei
                 }

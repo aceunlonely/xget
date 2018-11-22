@@ -9,6 +9,13 @@ var util = require('./util')
 //plusgins
 const plugins = require('./plugins.js')
 
+var getPrintString = content=>{
+    if(util.Type.isObject(content)){
+        return JSON.stringify(content)
+    }else{
+        return content
+    }
+}
 
 //main
 /* lust shall be
@@ -26,11 +33,15 @@ const plugins = require('./plugins.js')
 }
 */
 /**
- * inputHandler
+ * inputHandler 输入处理
  * @param {*} lust 
  * @param {*} options 
  */
 var inputHandler = (lust,options)=>{
+    if(options.config.verbose){
+        console.log('xget-engine: inputHandle 输入：=======================================================================')
+        console.log('lust: '+ getPrintString(lust)  + "\\r\\n options: " + getPrintString(options) )
+    }
     //check lust structure
     checkLust(lust)
 
@@ -73,7 +84,17 @@ var inputHandler = (lust,options)=>{
     })
 }
 
+/**
+ * 发现器处理
+ * @param {*} lust 
+ * @param {*} options 
+ * @param {*} input 
+ */
 var finderHandler=(lust,options,input)=>{
+    if(options.config.verbose){
+        console.log('xget-engine: finderHandler 输入：=======================================================================')
+        console.log(' input: '+ getPrintString(input) )
+    }
     var type = lust.finder.type || config.defaultFinder
     //todo add params
     var resultOrPromise = finderModule.invoke(type)[type](input,lust.finder,options)
@@ -88,7 +109,17 @@ var finderHandler=(lust,options,input)=>{
     })
 }
 
+/**
+ * 提取处理器
+ * @param {*} lust 
+ * @param {*} options 
+ * @param {*} result 
+ */
 var extractorHandler=(lust,options,result)=>{
+    if(options.config.verbose){
+        console.log('xget-engine: extractorHandler 输入：=======================================================================')
+        console.log('result: '+ getPrintString(result) )
+    }
     var type = lust.extractor.type || config.defaultExtractor
     //todo add Params
     var resultOrPromise = extractorModule.invoke(type)[type](result,lust.extractor,options)
@@ -104,7 +135,17 @@ var extractorHandler=(lust,options,result)=>{
     })
 }
 
+/**
+ * 输出处理器
+ * @param {*} lust 
+ * @param {*} options 
+ * @param {*} result 
+ */
 var outputHandler=(lust,options,result)=>{
+    if(options.config.verbose){
+        console.log('xget-engine: outputHandler 输入：=======================================================================')
+        console.log('result: '+ getPrintString(result) )
+    }
     return new Promise((r,j)=>{
         if(!lust.output){
             r(result)
@@ -136,5 +177,8 @@ var checkLust =(lust)=>{
 
 
 exports.run = (lust,options)=>{
+    options = options || {}
+    options.config = options.config || config
+    //console.log(getPrintString(options))
     return inputHandler(lust,options)
 }
