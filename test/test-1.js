@@ -74,8 +74,7 @@ var lustUSD ={
             role: "finder",
             type:"text",
             position:{
-                after:["/SHIP\\s{1,3}TO/"],
-                before:["SHIPPED","/ON\\W{1,3}ABOUT/"],
+                after:["/DEKESCRIPTIOHMN[ ]{1,}QUANYZITY[ ]{1,}UNIT[ ]{1,}PRICE[ ]{1,}AMOUNT/"]
             }
         },
         {

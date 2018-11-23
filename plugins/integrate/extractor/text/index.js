@@ -1,6 +1,11 @@
 
 var check =()=>{}
 
+
+var iselect = ()=>{
+
+}
+
 var iRun = (result,extractor,options)=>{
     if(!result) return ''
     var rr =result
@@ -10,6 +15,9 @@ var iRun = (result,extractor,options)=>{
        if(rs){
            rr =rs
        }
+    }
+    if(extractor.select){
+        //todo
     }
     return rr
 }
@@ -25,7 +33,7 @@ exports.example = {
     regEx: "xxxxxx",
     select: [  //todo
         {
-            keys:["USD","/US[A]/"],
+            key:["USD","/US[A]/"],
             value:"USD"
         },
         "CNY",
