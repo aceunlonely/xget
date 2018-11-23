@@ -52,9 +52,9 @@ var lustAddr ={
 }
 
 //addr
-engine.run(lustAddr,{ config: {verbose:false}}).then(data => {
-    console.log(data)
-})
+// engine.run(lustAddr,{ config: {verbose:false}}).then(data => {
+//     console.log(data)
+// })
 
 
 //USD
@@ -69,15 +69,24 @@ var lustUSD ={
         type:"text",
         position:{
             after:["/SHIP\\s{1,3}TO/"],
-            before:["SHIPPED","/ON\\W{1,3}ABOUT/"]
+            before:["SHIPPED","/ON\\W{1,3}ABOUT/"],
+            lines: 3 //add
         }
     },
     extractor:{
-        type:"text"
+        type:"text",
+        select: [  //add
+            {
+                keys:["USD","/US[A]/"],
+                value:"USD"
+            },
+            "CNY",
+            "OTHER"
+        ]
         //regEx:"H\\d{8}"
     }
 }
 
-engine.run(lustUSD,{ config: {verbose:false}}).then(data => {
-    console.log(data)
-})
+// engine.run(lustUSD,{ config: {verbose:false}}).then(data => {
+//     console.log(data)
+// })
