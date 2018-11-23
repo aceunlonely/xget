@@ -42,7 +42,7 @@ exports.endWith =endWith
 exports.startWith = startWith
 
 
-exports.indexOf = (str,searchStr) =>{
+exports.indexOfString = (str,searchStr) =>{
     if(!str || !searchStr){
         return -1
     }
@@ -56,6 +56,46 @@ exports.indexOf = (str,searchStr) =>{
     }
     else{
         return str.indexOf(searchStr)
+    }
+}
+var indexOfString = exports.indexOfString
+
+exports.indexOf= (str, search) =>{
+    if(!str || !search){
+        return -1
+    }
+    if(Type.isString(search)){
+        return indexOfString(str,search)
+    }
+    else if(Type.isNumber(search)){
+        re = new RegExp(/\n/,"mg")
+        var nArr = new Array()
+        var temp=null
+        while ((temp = re.exec(str)) != null)
+            nArr.push(temp.index)
+        if(search >=0){
+            if(search ==0)
+                return 0
+            if(search-1 < nArr.length){
+                return nArr[search-1]
+            }
+            else{
+                //? maybe should know
+                return -1
+            }
+        }else
+        {
+            var activeIndex = nArr.length + search
+            if(activeIndex > -1){
+                return nArr[activeIndex]
+            }else{
+                //?  maybe should know
+                return -1
+            }
+        }
+    }
+    else{
+        throw Error('xget:plugins: unsupport search type')
     }
 }
 

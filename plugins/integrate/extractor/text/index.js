@@ -22,7 +22,15 @@ exports.run= (result,extractor,options)=>{
 
 exports.example = {
     type:"text",
-    regEx: "xxxxxx"
+    regEx: "xxxxxx",
+    select: [  //todo
+        {
+            keys:["USD","/US[A]/"],
+            value:"USD"
+        },
+        "CNY",
+        "OTHER"
+    ]
 }
 
 
