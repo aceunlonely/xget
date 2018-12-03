@@ -144,6 +144,11 @@ exports.example2 = {
 
 
 
-exports.exampleResult= "content"
+exports.output= "content"
+
+//exports.input = "" 
+// exports.outputs 
+// exports.inputs
+
 
 exports.iGetRealSelect = iGetRealSelect

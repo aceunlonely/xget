@@ -116,4 +116,8 @@ exports.example3 = {
     }
 }
 
-exports.exampleResult = ["content part",""]
+exports.output = ["content part",""]
+
+//exports.input = "" 
+// exports.outputs 
+// exports.inputs

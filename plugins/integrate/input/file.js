@@ -25,4 +25,7 @@ exports.example = {
     encoding : "utf8(默认值utf8)"
 }
 
-exports.exampleResult = "content"
+exports.output = "content"
+//exports.input = "" 
+// exports.outputs 
+// exports.inputs

@@ -17,6 +17,9 @@ exports.example = {
 }
 
 
-exports.exampleResult= "content"
+exports.ouput= "content"
+//exports.input = "" 
+// exports.outputs 
+// exports.inputs
 
 exports.remark = ""

@@ -167,6 +167,7 @@ var finderHandler=(finder,options,input)=>{
         console.log('xget-engine: filter['+ finder.next.thisIndex +'] finderHandler 输入：=======================================================================')
         console.log(' input: '+ getPrintString(input) )
     }
+    //todo add guess input type
     var type = finder.type || config.defaultFinder
     var resultOrPromise = finderModule.invoke(type)[type](input,finder,options)
     return new Promise((r,j)=>{
@@ -191,6 +192,7 @@ var extractorHandler=(extractor,options,result,nextFn)=>{
         console.log('xget-engine: filter['+ extractor.next.thisIndex +'] extractorHandler 输入：=======================================================================')
         console.log('result: '+ getPrintString(result) )
     }
+    //todo add guess input type
     var type = extractor.type || config.defaultExtractor
     var resultOrPromise = extractorModule.invoke(type)[type](result,extractor,options)
     return new Promise((r,j)=>{
@@ -216,6 +218,7 @@ var outputHandler=(lust,options,result)=>{
         console.log('xget-engine: outputHandler 输入：=======================================================================')
         console.log('result: '+ getPrintString(result) )
     }
+    //todo add guess result type
     return new Promise((r,j)=>{
         if(!lust.output){
             r(result)
