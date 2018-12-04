@@ -31,7 +31,8 @@ var iGetRealSelect =sel=>{
         sel =s 
     }
     if(!util.Type.isArray(sel)){
-        throw Error("xget:plugin:e:text:iGetRealSelect:  select must be a string type or Array")
+        console.error("xget:plugin:e:text:iGetRealSelect:  select must be a string type or Array" + element)
+        throw Error("xget:plugin:e:text:iGetRealSelect:  select must be a string type or Array" + element)
     }
     var realSel = new Array()
     sel.forEach(element => {
@@ -48,7 +49,12 @@ var iGetRealSelect =sel=>{
         }*/
         else if(util.Type.isObject(element)){
             if(!element.key || !element.value){
-                throw Error('xget:plugin:e:text:iGetRealSelect : element of sel not right :' + element)
+                console.error('xget:plugin:e:text:iGetRealSelect : element of sel  must contains key, like { key:["USD","/US[A]/"],value:"USD"} your element:' + JSON.stringify(element))
+                throw Error('xget:plugin:e:text:iGetRealSelect : element of sel  must contains key  :' + element)
+            }
+            if(!element.value){
+                console.error('xget:plugin:e:text:iGetRealSelect : element of sel must contains value, like { key:["USD","/US[A]/"],value:"USD"} your element:' + JSON.stringify(element))
+                throw Error('xget:plugin:e:text:iGetRealSelect : element of sel must contains value :' + element)
             }
             realSel.push({
                 key : util.Type.isArray(element.key) ?  element.key : [element.key],
@@ -59,6 +65,7 @@ var iGetRealSelect =sel=>{
         //[["test","/test[a]/"],"abc"]
         else if(util.Type.isArray(element)){
             if(element.length <= 1){
+                console.error('xget:plugin:e:text:iGetRealSelect : element of sel not right2 :' + element)
                 throw Error('xget:plugin:e:text:iGetRealSelect : element of sel not right :' + element)
             }
             realSel.push({
@@ -67,6 +74,7 @@ var iGetRealSelect =sel=>{
             })
         }
         else{
+            console.error('xget:plugin:e:text:iGetRealSelect : element of sel not right3 :' + element)
             throw Error('xget:plugin:e:text:iGetRealSelect : element of sel not right :' + element)
         }
     });
@@ -75,6 +83,7 @@ var iGetRealSelect =sel=>{
 
 
 var iselect = (result,select)=>{
+    
     //get real select 
     var realSelect = iGetRealSelect(select)
     var findArray = []
@@ -82,6 +91,7 @@ var iselect = (result,select)=>{
         key:["USD","/US[A]/"],
         value:"USD"
     } */
+    
     realSelect.forEach(element => {
         for(var index=0 ;index< element.key.length;index ++){
             if(util.indexOf(result,element.key[index]) > -1){
@@ -89,8 +99,11 @@ var iselect = (result,select)=>{
                 break
             }
         }
-    });
-    return  findArray
+    })
+    //todo make array
+    if(findArray.length>0)
+        return findArray[0]
+    return  null
 }
 
 var iRun = (result,extractor,options)=>{

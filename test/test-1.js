@@ -87,7 +87,7 @@ var lustUSD ={
             type:"text",
             select: [  //add
                 {
-                    keys:["USD","/US[A]/"],
+                    key:["USD","/US[A]/"],
                     value:"USD"
                 },
                 "CNY",
@@ -98,6 +98,6 @@ var lustUSD ={
     ]
 }
 
-// engine.run(lustUSD,{ config: {verbose:false}}).then(data => {
-//     console.log(data)
-// })
+engine.run(lustUSD,{ config: {verbose:false}}).then(data => {
+    console.log(data)
+})
