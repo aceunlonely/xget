@@ -17,6 +17,32 @@ var getPrintString = content=>{
     }
 }
 
+var iPromiseAll =  (arr,fn,completeFn)=>{
+    if(!util.Type.isArray(arr)){
+        arr = [arr]
+    }
+    var pArray = new Array()
+    arr.forEach(element => {
+        pArray.push(fn(element))
+    });
+    Promise.all(pArray).then(values=>{
+        completeFn(values)
+    })
+}
+
+/**
+ * judge is a branch
+ * @param {*} inputOrFilter 
+ */
+var iIsBranch = inputOrFilter=>{
+    if(inputOrFilter){
+        if(inputHandler.multi || inputHandler.multiple || inputHandler.branch){
+            return true
+        }
+    }
+    return false
+}
+
 //main
 /* lust shall be
 {
