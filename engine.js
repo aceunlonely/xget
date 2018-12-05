@@ -36,7 +36,8 @@ var iPromiseAll =  (arr,fn,completeFn)=>{
  */
 var iIsBranch = inputOrFilter=>{
     if(inputOrFilter){
-        if(inputHandler.multi || inputHandler.multiple || inputHandler.branch){
+        if(inputOrFilter.multi || inputOrFilter.multiple || inputOrFilter.branch){
+            //console.log("xx")
             return true
         }
     }
@@ -89,7 +90,16 @@ var inputHandler = (lust,options)=>{
                 if(inputOrPromise.then){
                     return new Promise((r,j)=>{
                         inputOrPromise.then(data=>{
-                            r(filterHandler(lust,options,data))
+                            //if branch , need promiseAll
+                            if(iIsBranch(lust.input)){
+                                iPromiseAll(data,d=>{
+                                    return filterHandler(lust,options,d)
+                                },values=>{
+                                    r(values)
+                                })
+                            }else{
+                                r(filterHandler(lust,options,data))
+                            }
                         })
                     })
                 }
@@ -105,7 +115,15 @@ var inputHandler = (lust,options)=>{
         inputString = options.input
     }
     return new Promise((r,j)=>{
-        r(filterHandler(lust,options,inputString))
+        if(iIsBranch(inputString)){
+            iPromiseAll(inputString,d=>{
+                return filterHandler(lust,options,d)
+            },values=>{
+                r(values)
+            })
+        }else{
+            r(filterHandler(lust,options,inputString))
+        }
     })
 }
 
@@ -175,9 +193,11 @@ var filterHandler=(lust,options,input)=>{
     if(firstF){
         return new Promise((r,j)=>{
             var thisHandler = util.startWith(firstF.role,"f") ? finderHandler : extractorHandler
+            // here dont need  branch
             r(thisHandler(firstF,options,input))
         })
     }else{
+        console.error('xget:engine lust need at least one filter')
         throw Error('xget:engine lust need at least one filter')
     }
 }
@@ -199,10 +219,31 @@ var finderHandler=(finder,options,input)=>{
     return new Promise((r,j)=>{
         if(resultOrPromise.then){
             resultOrPromise.then(data=>{
-                r(finder.next.handler(finder.next.filter,options,data))
+                //suport branch
+                if(iIsBranch(finder)){
+                    iPromiseAll(data,d=>{
+                       return finder.next.handler(finder.next.filter,options,d)
+                    },values=>{
+                        r(values)
+                    })
+                }
+                else{
+                    r(finder.next.handler(finder.next.filter,options,data))
+                }
+                
             })
         }else{
-            r(finder.next.handler(finder.next.filter,options,resultOrPromise))
+            // support branch
+            if(iIsBranch(finder)){
+                iPromiseAll(resultOrPromise,d=>{
+                    return finder.next.handler(finder.next.filter,options,d)
+                },values=>{
+                    r(values)
+                })
+            }else
+            {
+                r(finder.next.handler(finder.next.filter,options,resultOrPromise))
+            }
         }
     })
 }
@@ -224,17 +265,36 @@ var extractorHandler=(extractor,options,result,nextFn)=>{
     return new Promise((r,j)=>{
         if(resultOrPromise.then){
             resultOrPromise.then(data=>{
-                r(extractor.next.handler(extractor.next.filter,options,data))
+                if(iIsBranch(extractor)){
+                    iPromiseAll(data,d=>{
+                        return extractor.next.handler(extractor.next.filter,options,d)
+                    },values=>{
+                        r(values)
+                    })
+                }
+                else{
+                    r(extractor.next.handler(extractor.next.filter,options,data))
+                }
+                
             })
         }
         else{
-            r(extractor.next.handler(extractor.next.filter,options,resultOrPromise))
+            if(iIsBranch(extractor)){
+                iPromiseAll(resultOrPromise,d=>{
+                    return extractor.next.handler(extractor.next.filter,options,d)
+                },values=>{
+                    r(values)
+                })
+            }
+            else{
+                r(extractor.next.handler(extractor.next.filter,options,resultOrPromise))
+            }
         }
     })
 }
 
 /**
- * 输出处理器
+ * 输出处理器 output not support multi
  * @param {*} lust 
  * @param {*} options 
  * @param {*} result 

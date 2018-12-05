@@ -112,8 +112,11 @@ var iRun = (result,extractor,options)=>{
     if(extractor.regEx){
        var re =  new RegExp(extractor.regEx,"mg")
        var rs = result.match(re)
+       //console.log(rs)
        if(rs){
-           rr =rs
+           // todo make array
+           if(rs.length>0)
+                rr =rs[0]
        }
     }
     if(extractor.select){
