@@ -8,6 +8,8 @@ x get
 1. support customize plugins , easy extend
 2. support recurse get lustJson
 3. input and filter support multi or branch
+4. support filter  guess input /output type   // todo
+5. maybe input.file can support Glob  //uncomfirn
 
 ## main desgin
     details @ docs/
