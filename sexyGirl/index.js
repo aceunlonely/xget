@@ -1,4 +1,4 @@
-
+var engine = require('../engine')
 
 
 
@@ -44,7 +44,7 @@ exports.beforeSatifyOneLust = (lustInfo,options)=>{
 exports.afterSatifyOneLust = (lustInfo,options) =>{}
 
 exports.afterSatifyAllLust = (lustJson,options) =>{
-    console.log(lustJson)
+    //console.log(lustJson)
     return {
         isRemakeLustJson : false
     }
@@ -54,8 +54,9 @@ exports.afterSatifyAllLust = (lustJson,options) =>{
 exports.getInputOneLustValue = (lustInfo,lastData,options) =>{
 
     //main logic here todo
-    stdin.writeLine(lust.getPromptFromLustInfo(lustInfo,lastData))
-    return stdin.readLine()
+    return engine.run(lustInfo)
+    // stdin.writeLine(lust.getPromptFromLustInfo(lustInfo,lastData))
+    // return stdin.readLine()
 }
 
 exports.validateOneLustInfo = (value,lustInfo,lastData,options) =>{
