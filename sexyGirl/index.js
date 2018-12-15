@@ -53,8 +53,9 @@ exports.afterSatifyAllLust = (lustJson,options) =>{
 
 exports.getInputOneLustValue = (lustInfo,lastData,options) =>{
 
+    //console.log(lustInfo)
     //main logic here todo
-    return engine.run(lustInfo)
+    return engine.run(lustInfo,options)
     // stdin.writeLine(lust.getPromptFromLustInfo(lustInfo,lastData))
     // return stdin.readLine()
 }

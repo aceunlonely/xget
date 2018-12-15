@@ -1,7 +1,7 @@
 var inputModule = require('peeriocjs').module("xget_input")
 var finderModule = require('peeriocjs').module('xget_finder')
 var extractorModule = require('peeriocjs').module('xget_extractor')
-
+require('./config')
 var config = require('peeriocjs').module("xget").invoke.sync.config()
 
 var util = require('./util')

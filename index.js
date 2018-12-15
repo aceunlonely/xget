@@ -1,6 +1,8 @@
 const lustJson = require('lustJson')
 const sxg = require('./sexyGirl')
+require('./config')
 
 exports.get = (json,options) =>{
-    return lustJson.get(json,sxg,{})
+    //console.log(json)
+    return lustJson.get(json,sxg,options)
 }

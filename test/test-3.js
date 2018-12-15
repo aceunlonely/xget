@@ -18,23 +18,40 @@ xget.get({
             }
         ]
     }
-}).then(raw=>{
+},{verbose:false}).then(raw=>{
     var options = { verbose : false}
-    options.input = raw
-
+    options.input = raw.input
+   // console.log(raw)
+    //console.log(options)
     //get cooked
-    xget.get({
-        fapiaohao:{
-            isLust:true
-        },
-        gongfangmingcheng:{},
-        shouhuorenxinxi:{},
-        yunshufangshi:{},
-        kongyunri:{},
-        maoyifangshi:{},
-        dingdanhao:{},
-        detals:{}
-    },options).then(cooked =>{
+    // xget.get({
+    //     fapiaohao:{
+    //         isLust:true
+    //     },
+    //     gongfangmingcheng:{},
+    //     shouhuorenxinxi:{},
+    //     yunshufangshi:{},
+    //     kongyunri:{},
+    //     maoyifangshi:{},
+    //     dingdanhao:{},
+    //     detals:{}
+    // },options).then(cooked =>{
 
+    // })
+    //console.log(options)
+    xget.get({
+        all : {
+            isLust:true,
+            filter:[
+                {
+                    role: "extractor",
+                    type:"ocrSplit"
+                }
+            ]
+        }
+    },options).then(data=>{
+        //console.log(data)
+
+        console.log(data.all)
     })
 })
