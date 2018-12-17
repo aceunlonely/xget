@@ -13,3 +13,5 @@ x get
 
 ## main desgin
     details @ docs/
+
+## how to use
