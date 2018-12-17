@@ -15,3 +15,10 @@ x get
     details @ docs/
 
 ## how to use
+```shell
+npm i --save xget.js
+```
+
+```js
+todo
+```
