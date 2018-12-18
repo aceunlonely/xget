@@ -1,4 +1,4 @@
-const lustJson = require('lustJson')
+const lustJson = require('lustjson.js')
 const sxg = require('./sexyGirl')
 require('./config')
 

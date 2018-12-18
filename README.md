@@ -20,5 +20,42 @@ npm i --save xget.js
 ```
 
 ```js
-todo
+var xget = require('xget.js')
+
+// get input
+xget.get({
+    input : {
+        isLust:true,
+        input:{
+            type: "file",
+            path:  [__dirname + "/data2/c-0.txt",__dirname + "/data2/c-1.txt",__dirname + "/data2/c-2.txt",__dirname + "/data2/c-3.txt",__dirname + "/data2/c-4.txt"],
+            encode: "utf8",
+            multi:false
+        },
+        filter:[
+            {
+                role: "extractor",
+                type: "ocrPre"
+            }
+        ]
+    }
+},{verbose:false}).then(raw=>{
+    var options = { verbose : false}
+    options.input = raw.input
+    xget.get({
+        all : {
+            isLust:true,
+            filter:[
+                {
+                    role: "extractor",
+                    type:"ocrSplit"
+                }
+            ]
+        }
+    },options).then(data=>{
+        //console.log(data)
+        console.log(data.all)
+    })
+})
+
 ```
