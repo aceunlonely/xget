@@ -17,7 +17,7 @@ var getPrintString = content=>{
     }
 }
 
-var iPromiseAll =  (arr,fn,completeFn)=>{
+var iPromiseAll =  (arr,fn,completeFn,onjected)=>{
     if(!util.Type.isArray(arr)){
         arr = [arr]
     }
@@ -27,7 +27,7 @@ var iPromiseAll =  (arr,fn,completeFn)=>{
     });
     Promise.all(pArray).then(values=>{
         completeFn(values)
-    })
+    },onjected)
 }
 
 /**
@@ -96,7 +96,7 @@ var inputHandler = (lust,options)=>{
                                     return filterHandler(lust,options,d)
                                 },values=>{
                                     r(values)
-                                })
+                                },j)
                             }else{
                                 r(filterHandler(lust,options,data))
                             }
@@ -120,7 +120,7 @@ var inputHandler = (lust,options)=>{
                 return filterHandler(lust,options,d)
             },values=>{
                 r(values)
-            })
+            },j)
         }else{
             r(filterHandler(lust,options,inputString))
         }
@@ -225,13 +225,13 @@ var finderHandler=(finder,options,input)=>{
                        return finder.next.handler(finder.next.filter,options,d)
                     },values=>{
                         r(values)
-                    })
+                    },j)
                 }
                 else{
                     r(finder.next.handler(finder.next.filter,options,data))
                 }
                 
-            })
+            },j)
         }else{
             // support branch
             if(iIsBranch(finder)){
@@ -239,7 +239,7 @@ var finderHandler=(finder,options,input)=>{
                     return finder.next.handler(finder.next.filter,options,d)
                 },values=>{
                     r(values)
-                })
+                },j)
             }else
             {
                 r(finder.next.handler(finder.next.filter,options,resultOrPromise))
@@ -270,7 +270,7 @@ var extractorHandler=(extractor,options,result,nextFn)=>{
                         return extractor.next.handler(extractor.next.filter,options,d)
                     },values=>{
                         r(values)
-                    })
+                    },j)
                 }
                 else{
                     r(extractor.next.handler(extractor.next.filter,options,data))
@@ -284,7 +284,7 @@ var extractorHandler=(extractor,options,result,nextFn)=>{
                     return extractor.next.handler(extractor.next.filter,options,d)
                 },values=>{
                     r(values)
-                })
+                },j)
             }
             else{
                 r(extractor.next.handler(extractor.next.filter,options,resultOrPromise))
@@ -318,7 +318,8 @@ var outputHandler=(lust,options,result)=>{
             r(inputHandler(lust.output,options))
         }
         else{
-            throw Error("lust output must be a lust or nil")
+            //throw Error("lust output must be a lust or nil")
+            j(Error("lust output must be a lust or nil"))
         }
     })
 }

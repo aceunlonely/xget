@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/aceunlonely/xget#readme",
   "dependencies": {
-    "lustjson.js": "0.0.1",
+    "lustjson.js": "1.0.1",
     "peeriocjs": "^2.4.1"
   },
   "devDependencies": {
