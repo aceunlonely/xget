@@ -1,6 +1,6 @@
 {
   "name": "xget.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "get framework",
   "main": "index.js",
   "scripts": {
